@@ -1,0 +1,17 @@
+services:
+  ytproxy:
+    container_name: innertube-ytproxy
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    networks:
+      innertube:
+        ipv4_address: 172.20.0.7
+    ports: 
+      - "8080:6000"
+    
+networks:
+  innertube:
+    name: local
+    external: true

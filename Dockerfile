@@ -17,11 +17,11 @@ RUN --mount=type=cache,target=/usr/local/cargo/registry \
 
 FROM debian:stable-slim
 
-RUN --mount=type=cache,target=/var/cache/apt \
-    apt-get update && \
-    apt-get install -y --no-install-recommends \
-    ca-certificates && \
-    rm -rf /var/lib/apt/lists/*
+# RUN --mount=type=cache,target=/var/cache/apt \
+#     apt-get update && \
+#     apt-get install -y --no-install-recommends \
+#     ca-certificates && \
+#     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app/
 

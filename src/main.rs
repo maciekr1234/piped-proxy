@@ -129,8 +129,21 @@ async fn index(req: HttpRequest) -> Result<HttpResponse, Box<dyn Error>> {
     // parse query string
     let query = QString::from(req.query_string());
 
+
     let res = query.get("host");
-    let res = res.map(|s| s.to_string());
+    let mut res = res.map(|s| s.to_string());
+
+    if res.is_none() {
+        let path = req.path();
+        
+
+
+        if path.starts_with("/vi/") ||  path.starts_with("/vi_webp/")|| path.starts_with("/sb/") {
+            res = Some("i.ytimg.com".to_string());
+        } else if path.starts_with("/ggpht/") || path.starts_with("/a/") || path.starts_with("/ytc/") {
+            res = Some("yt3.ggpht.com".to_string());
+        }
+    }
 
     if res.is_none() {
         return Err("No host provided".into());
